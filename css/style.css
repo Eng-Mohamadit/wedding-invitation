@@ -1,0 +1,676 @@
+/* -----------------------------------------------------------
+   Root Variables & Aesthetic Styling
+----------------------------------------------------------- */
+:root {
+    --bg-ivory: #F4F3E8;
+    --card-bg: #FAF9F3;
+    --primary-sage: #53634A;
+    --secondary-sage: #7A8B71;
+    --light-sage: #E2E8DD;
+    --text-dark: #2C3328;
+    --text-muted: #667260;
+    --white: #FFFFFF;
+    --shadow-soft: 0 10px 30px rgba(83, 99, 74, 0.08);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --font-heading: 'Aref Ruqaa', serif;
+    --font-quran: 'Amiri', serif;
+    --font-body: 'Tajawal', sans-serif;
+    --transition: all 0.4s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-ivory);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    direction: rtl;
+    text-align: right;
+    overflow-x: hidden;
+    line-height: 1.7;
+    position: relative;
+    padding-bottom: 70px; /* Space for bottom nav on mobile */
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-bottom: 0;
+    }
+}
+
+/* Floating Leaf Particles */
+.leaf-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background-color: var(--primary-sage);
+    opacity: 0.15;
+    border-radius: 0 100% 0 100%;
+    animation: floatLeaf 12s infinite linear;
+}
+
+@keyframes floatLeaf {
+    0% {
+        transform: translateY(-10%) rotate(0deg) translateX(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.2;
+    }
+    80% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* Music Toggle Button */
+.music-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 1px solid var(--primary-sage);
+    color: var(--primary-sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+}
+
+.music-toggle:hover {
+    transform: scale(1.08);
+    background: var(--primary-sage);
+    color: var(--white);
+}
+
+/* -----------------------------------------------------------
+   1. Opening / Cover Screen
+----------------------------------------------------------- */
+.cover-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-ivory);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+    padding: 20px;
+}
+
+.cover-screen.opened {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cover-content {
+    max-width: 450px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cover-title {
+    font-family: var(--font-heading);
+    color: var(--primary-sage);
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.wreath-container {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 10px 0 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wreath-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: rotateSlow 40s infinite linear;
+}
+
+@keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.wreath-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.names-calligraphy {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--primary-sage);
+    line-height: 1.2;
+}
+
+.and-sym {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--secondary-sage);
+}
+
+.cover-details {
+    margin-bottom: 30px;
+}
+
+.cover-date {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.cover-location {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.btn-open {
+    background-color: var(--primary-sage);
+    color: var(--white);
+    border: none;
+    padding: 12px 32px;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-open:hover {
+    background-color: #42503a;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(83, 99, 74, 0.15);
+}
+
+/* -----------------------------------------------------------
+   Main Content Layout
+----------------------------------------------------------- */
+.main-content {
+    opacity: 0;
+    transition: opacity 1s ease 0.3s;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 15px;
+}
+
+.main-content.visible {
+    opacity: 1;
+}
+
+.section {
+    padding: 50px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.container {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Dividers */
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.divider-line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(to right, transparent, var(--secondary-sage), transparent);
+}
+
+.divider-icon {
+    color: var(--secondary-sage);
+    font-size: 0.8rem;
+}
+
+/* 2. Quran Section */
+.bismillah {
+    font-family: var(--font-quran);
+    font-size: 1.4rem;
+    color: var(--primary-sage);
+    margin-bottom: 10px;
+}
+
+.quran-verse {
+    font-family: var(--font-quran);
+    font-size: 1.25rem;
+    line-height: 2.2;
+    color: var(--text-dark);
+    max-width: 650px;
+    margin: 20px auto 10px auto;
+}
+
+.quran-footnote {
+    font-family: var(--font-quran);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 50px;
+}
+
+.intro-greeting {
+    margin-top: 30px;
+}
+
+.greeting-text {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--primary-sage);
+    margin-bottom: 25px;
+}
+
+.parents-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.parent-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.parent-title {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.parent-name {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--text-dark);
+}
+
+.parent-and {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--secondary-sage);
+}
+
+/* 3. Announcement Section */
+.announcement-section {
+    padding: 60px 0;
+}
+
+.relative-container {
+    position: relative;
+}
+
+.bg-wreath-faded {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 320px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Ccircle cx='150' cy='150' r='120' fill='none' stroke='%2353634A' stroke-width='1.5' stroke-dasharray='4 4' opacity='0.3'/%3E%3Cpath d='M 150 270 C 80 270 30 210 30 150 C 30 90 80 30 150 30' fill='none' stroke='%2353634A' stroke-width='2' opacity='0.3'/%3E%3Cpath d='M 150 270 C 220 270 270 210 270 150 C 270 90 220 30 150 30' fill='none' stroke='%2353634A' stroke-width='2' opacity='0.3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.announcement-lead {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.wedding-names {
+    font-family: var(--font-heading);
+    font-size: 3.2rem;
+    color: var(--primary-sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    font-weight: 400;
+}
+
+.ampersand {
+    font-size: 2rem;
+    color: var(--secondary-sage);
+}
+
+.flower-symbol {
+    margin-top: 20px;
+    color: var(--secondary-sage);
+    font-size: 1rem;
+    opacity: 0.7;
+    position: relative;
+    z-index: 1;
+}
+
+/* 4. Event Information Card */
+.info-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(83, 99, 74, 0.15);
+    border-radius: 16px;
+    padding: 35px 25px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+@media (min-width: 650px) {
+    .info-card {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 40px 20px;
+    }
+}
+
+.info-item {
+    text-align: center;
+    flex: 1;
+}
+
+.info-icon {
+    font-size: 1.5rem;
+    color: var(--primary-sage);
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.info-val {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.info-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.info-divider {
+    height: 1px;
+    background-color: rgba(83, 99, 74, 0.12);
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media (min-width: 650px) {
+    .info-divider {
+        width: 1px;
+        height: 60px;
+        margin: 0;
+    }
+}
+
+/* 6. Countdown Section */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--primary-sage);
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.count-box {
+    background: var(--card-bg);
+    border: 1px solid rgba(83, 99, 74, 0.2);
+    border-radius: 12px;
+    width: 75px;
+    height: 85px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-card);
+}
+
+.count-num {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-sage);
+    line-height: 1.1;
+}
+
+.count-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.countdown-footer {
+    font-size: 1rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* 7. Action Buttons */
+.btn-primary-action {
+    display: inline-block;
+    background-color: var(--primary-sage);
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.btn-primary-action:hover {
+    background-color: #42503a;
+    transform: translateY(-2px);
+}
+
+.secondary-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-secondary-action {
+    background-color: transparent;
+    border: 1px solid var(--primary-sage);
+    color: var(--primary-sage);
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-secondary-action:hover {
+    background-color: var(--primary-sage);
+    color: var(--white);
+}
+
+/* 8. Final Message */
+.final-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--primary-sage);
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.final-dua {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* 5. Bottom Navigation (Mobile) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    border-top: 1px solid rgba(83, 99, 74, 0.15);
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0;
+    z-index: 90;
+}
+
+@media (min-width: 768px) {
+    .bottom-nav {
+        display: none;
+    }
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.nav-item i {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+}
+
+.nav-item:hover, .nav-item:focus {
+    color: var(--primary-sage);
+}
+
+/* Toast Notification */
+.toast-notification {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--primary-sage);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow-soft);
+    opacity: 0;
+    transition: all 0.4s ease;
+    z-index: 200;
+    pointer-events: none;
+}
+
+.toast-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .wedding-names {
+        font-size: 2.5rem;
+    }
+    .count-box {
+        width: 65px;
+        height: 75px;
+    }
+    .count-num {
+        font-size: 1.3rem;
+    }
+}
